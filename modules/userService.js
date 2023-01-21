@@ -8,13 +8,26 @@ class UserService{
     async getAllUsers(){
         try{
             return new Promise(function(resolve,reject){
-                sqlInstance.query("Select * from Customers",(err,res,fields) =>{
+                var sql = `Select * from Customers`;
+                sqlInstance.query(sql,(err,rows,fields) =>{
                     console.log("Inside service call");
-                    resolve(res);
+                    resolve(rows);
                 });
             })
         }
         catch(err){ return err; }
+    }
+
+    async addUser(newUser){
+        try{
+            return new Promise(function(resolve,reject){
+                var sql = `insert into Customers(name,address,mobile_no) values('${newUser.name}','${newUser.address}','${newUser.mobile_no}')`;
+                sqlInstance.query(sql,(err,result) =>{
+                    resolve(result);
+                })
+            })
+        }
+        catch(err){return err;}
     }
 }
 

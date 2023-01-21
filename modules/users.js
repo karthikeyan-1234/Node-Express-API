@@ -16,8 +16,16 @@ router.get('/users',async (req,res)=>{
 })
 
 router.post("/adduser",(req,res)=>{
-    console.log(req.body);
-    res.send("data posted");
+    var usr = req.body;
+    try{
+        srv.addUser(usr).then((result)=> {
+            res.send(result);
+        })
+    }
+    catch(err){
+        res.send(err);
+    }
+    
 });
 
 module.exports = router;
