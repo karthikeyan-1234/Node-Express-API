@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 var UserService = require("./userService");
-var srv = new UserService();
+var service = new UserService();
 
 router.get('/users',async (req,res)=>{
     try{
-        srv.getAllUsers().then((result)=> {
+        service.getAllUsers().then((result)=> {
             res.send(result.recordset);
         })
     }
@@ -18,7 +18,7 @@ router.get('/users',async (req,res)=>{
 router.post("/adduser",(req,res)=>{
     var usr = req.body;
     try{
-        srv.addUser(usr).then((result)=> {
+        service.addUser(usr).then((result)=> {
             res.send(result);
         })
     }
